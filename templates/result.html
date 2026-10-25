@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resume Analysis Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>Resume Analysis Result</h1>
+
+        <p>AI-powered analysis of your resume</p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>📄 Resume</h2>
+
+        <p>
+            <strong>File:</strong>
+            {{ filename }}
+        </p>
+
+
+        <div class="result-box">
+
+            <h2>🎯 Job Match Score</h2>
+
+            <div class="score">
+
+                <span>{{ score }}%</span>
+
+                <small>Match Score</small>
+
+            </div>
+
+        </div>
+
+        <div class="score-breakdown">
+
+    <h2>📊 Score Breakdown</h2>
+
+    <div class="score-item">
+
+        <div>
+            <strong>Skills Match</strong>
+            <span>{{ skill_score }}%</span>
+        </div>
+
+        <div class="progress">
+            <div
+                class="progress-bar"
+                style="width: {{ skill_score }}%;">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="score-item">
+
+        <div>
+            <strong>Content Similarity</strong>
+            <span>{{ text_score }}%</span>
+        </div>
+
+        <div class="progress">
+            <div
+                class="progress-bar"
+                style="width: {{ text_score }}%;">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="score-item">
+
+        <div>
+            <strong>Resume Quality</strong>
+            <span>{{ quality_score }}%</span>
+        </div>
+
+        <div class="progress">
+            <div
+                class="progress-bar"
+                style="width: {{ quality_score }}%;">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+        <div class="analysis-section">
+
+            <h2>🛠️ Resume Skills</h2>
+
+            <div class="skills-container">
+
+                {% for skill in resume_skills %}
+
+                    <span class="skill">
+                        {{ skill }}
+                    </span>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <div class="analysis-section">
+
+            <h2>💼 Required Skills</h2>
+
+            <div class="skills-container">
+
+                {% for skill in required_skills %}
+
+                    <span class="skill">
+                        {{ skill }}
+                    </span>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <div class="analysis-section">
+
+            <h2>✅ Matched Skills</h2>
+
+            <div class="skills-container">
+
+                {% for skill in matched_skills %}
+
+                    <span class="matched-skill">
+                        {{ skill }}
+                    </span>
+
+                {% endfor %}
+
+            </div>
+
+            {% if not matched_skills %}
+
+                <p>No matching skills found.</p>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="analysis-section">
+
+            <h2>❌ Missing Skills</h2>
+
+            <div class="skills-container">
+
+                {% for skill in missing_skills %}
+
+                    <span class="missing-skill">
+                        {{ skill }}
+                    </span>
+
+                {% endfor %}
+
+            </div>
+
+            {% if not missing_skills %}
+
+                <p>No major missing skills detected.</p>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="analysis-section">
+
+            <h2>💡 AI Suggestions</h2>
+
+            <ul class="suggestions">
+
+                {% for suggestion in suggestions %}
+
+                    <li>{{ suggestion }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+        <a href="{{ url_for('download_report') }}"
+   class="download-button">
+    📥 Download Analysis Report (PDF)
+</a>
+
+
+        <a href="/" class="back-button">
+            Analyze Another Resume
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
